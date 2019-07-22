@@ -1,44 +1,33 @@
 import io.qameta.allure.Attachment;
 
 import io.qameta.allure.Description;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.jbehave.core.annotations.When;
+import org.junit.jupiter.api.*;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 
 public class PlannerHomePage extends PlannerSettings {
 
     @BeforeEach
     public void testSetup() {
-
-        System.setProperty(property, property2);
-        ChromeOptions options = new ChromeOptions();
-        //options.addArguments("headless");
-
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.get(site);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
+        testUrl();
+        loadBrowser();
     }
 
     @AfterEach
     public void ExitTests() {
-        driver.close();
+        closeDriver();
     }
 
     @Test
@@ -54,7 +43,9 @@ public class PlannerHomePage extends PlannerSettings {
     @Test
     @Attachment
     @DisplayName("Step01: Ввод логина")
-    public void Step01() throws Exception {
+    @When("I open start page")
+    public void Step01() {
+
         driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[2]/form[1]/div[1]/label[1]")).isDisplayed(); // find LDAP Username
         driver.findElement(By.id("id_username")).isDisplayed();
         driver.findElement(By.id("id_username")).sendKeys(login);
@@ -69,7 +60,6 @@ public class PlannerHomePage extends PlannerSettings {
         driver.findElement(By.id("id_password")).isDisplayed();
         driver.findElement(By.id("id_password")).sendKeys(password);
         captureScreenshot(driver);
-
     }
 
     @Test
@@ -84,8 +74,6 @@ public class PlannerHomePage extends PlannerSettings {
         driver.findElement(By.xpath("//button[@class='btn btn-primary']")).click(); // кнопка войти
         assertEquals("Skills - Gerard Kunze - TT Planner", driver.getTitle());
         captureScreenshot(driver);
-        driver.close();
-
     }
 
     @Test
@@ -234,7 +222,7 @@ public class PlannerHomePage extends PlannerSettings {
     public void Step14() throws NoSuchElementException {
 
         Actions action = new Actions(driver);
-        WebDriverWait wait = (new WebDriverWait(driver, 10));
+        WebDriverWait wait = (new WebDriverWait(driver, Duration.ofSeconds(10)));
 
         driver.findElement(By.id("id_username")).isDisplayed();
         driver.findElement(By.id("id_username")).sendKeys(login);
@@ -258,7 +246,7 @@ public class PlannerHomePage extends PlannerSettings {
                     action.moveToElement(btn).perform();
                     driver.findElement(By.xpath("html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[14]/div[1]/div[1]/span[1]")).isDisplayed(); // remove Backend
                     driver.findElement(By.xpath("html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[14]/div[1]/div[1]/span[1]")).click(); // remove Backend
-                    WebDriverWait wait1 = (new WebDriverWait(driver, 10));
+                    WebDriverWait wait1 = (new WebDriverWait(driver, Duration.ofSeconds(10)));
                     wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/button[2]")));
                     driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/button[2]")).isDisplayed(); // put button delete Backend
                     driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/button[2]")).click(); //  put button delete Backend
@@ -345,7 +333,6 @@ public class PlannerHomePage extends PlannerSettings {
         }
 
     }
-
 
 }
 
