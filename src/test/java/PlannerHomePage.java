@@ -33,9 +33,9 @@ public class PlannerHomePage extends PlannerSettings {
     @Test
     @DisplayName("Step00: Проверка на домашнюю страницу")
     public void Step00() {
-        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/span[1]/span[1]")).isDisplayed(); // find TT planner
+        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/span[1]/span[1]")).isDisplayed(); // find 
         //if (!"Planner".equals(driver.getTitle())) {
-        // throw new IllegalStateException("This isn't Planner's home Page!");
+        // throw new IllegalStateException("//");
         captureScreenshot(driver);
 
     }
@@ -260,7 +260,7 @@ public class PlannerHomePage extends PlannerSettings {
 
         } catch (NoSuchElementException exception) {
 
-            System.out.println("popalC9I");
+            System.out.println("catch");
 
         }
 
