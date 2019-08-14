@@ -16,18 +16,18 @@ public class PlannerSettings {
 
     static WebDriver driver;
 
-    public String login = "gerardkunze";
-    public String password = "123456";
+    public String login = "//";
+    public String password = "//";
 
     public String property = "webdriver.chrome.driver";
-    public String property2 = "/home/raltynbaev/chromedriver";
+    public String property2 = "//";
 
     public static void captureScreenshot(WebDriver driver) {
         try {
             Date date = new Date();
             TakesScreenshot ts = (TakesScreenshot) driver;
             File sources = ts.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(sources, new File("/home/raltynbaev/IdeaProjects/PlannerTest/target/screenshots/screenshots" + date + ".png"));
+            FileUtils.copyFile(sources, new File("//screenshots" + date + ".png"));
             System.out.println("Screenshot taken");
         } catch (Exception e) {
             System.out.println("Exception while taking screenshot " + e.getMessage());
@@ -35,7 +35,7 @@ public class PlannerSettings {
     }
 
     public void loadBrowser() {
-        final String site = "https://planner-sandbox.dev.thumbtack.net/accounts/login/";
+        final String site = "//";
 
         System.setProperty(property, property2);
         ChromeOptions options = new ChromeOptions();
@@ -51,7 +51,7 @@ public class PlannerSettings {
     public void testUrl(){
 
         try {
-            URL url = new URL("https://planner-sandbox.dev.thumbtack.net/accounts/login/");
+            URL url = new URL("//");
             URLConnection conn = url.openConnection();
             conn.connect();
 
