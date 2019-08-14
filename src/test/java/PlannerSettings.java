@@ -57,10 +57,10 @@ public class PlannerSettings {
 
         }
         catch (MalformedURLException e) {
-            System.out.println("yoy2");
+            System.out.println("1");
         }
         catch (IOException e) {
-            System.out.println("yoy");
+            System.out.println("2");
         }
     }
 
